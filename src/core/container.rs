@@ -1,12 +1,9 @@
+trait Container {}
 
-trait Container {
-
+pub struct WoopsaContainer {
+    pub items: Vec<WoopsaContainer>,
 }
 
-struct WoopsaContainer {
+impl WoopsaContainer {}
 
-}
-
-impl Container for WoopsaContainer {
-
-}
+impl Container for WoopsaContainer {}

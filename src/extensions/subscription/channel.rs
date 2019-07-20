@@ -1,4 +1,3 @@
+struct SubscriptionChannel;
 
-impl SubscriptionChannel {
-
-}
+impl SubscriptionChannel {}

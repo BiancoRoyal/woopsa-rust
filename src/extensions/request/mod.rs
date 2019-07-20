@@ -1,8 +1,3 @@
+struct Request {}
 
-struct Request {
-
-}
-
-impl Request {
-
-}
+impl Request {}

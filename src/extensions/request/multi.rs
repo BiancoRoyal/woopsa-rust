@@ -1,5 +1,3 @@
+struct MultiRequest;
 
-
-impl MultiRequest {
-
-}
+impl MultiRequest {}

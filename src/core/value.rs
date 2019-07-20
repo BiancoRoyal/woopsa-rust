@@ -1,12 +1,14 @@
+use crate::core::types::WoopsaValueType;
+use std::time::SystemTime;
 
-trait Value {
+pub trait Value {}
 
+pub struct WoopsaValue {
+    pub as_text: String,
+    pub timestamp: SystemTime,
+    pub value_type: WoopsaValueType,
 }
 
-struct WoopsaValue {
+impl WoopsaValue {}
 
-}
-
-impl Value for WoopsaValue {
-
-}
+impl Value for WoopsaValue {}

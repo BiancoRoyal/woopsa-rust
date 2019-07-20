@@ -1,7 +1,5 @@
-
-#[derive( Clone, Copy )]
-pub enum WoopsaValueType
-{
+#[derive(Clone, Copy)]
+pub enum WoopsaValueType {
     Null,
     Logical,
     Integer,
@@ -11,5 +9,5 @@ pub enum WoopsaValueType
     Text,
     WoopsaLink,
     JsonData,
-    ResourceUrl
+    ResourceUrl,
 }

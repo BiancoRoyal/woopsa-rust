@@ -1,7 +1,6 @@
-
+pub mod client;
 pub mod core;
 pub mod extensions;
-pub mod client;
 pub mod server;
 
 #[cfg(test)]

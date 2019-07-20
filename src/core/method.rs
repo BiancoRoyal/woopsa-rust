@@ -1,12 +1,13 @@
+use crate::core::method_argument_info::WoopsaMethodArgumentInfo;
+use crate::core::types::WoopsaValueType;
 
-trait Method {
+pub trait Method {}
 
+pub struct WoopsaMethod {
+    pub arguments: Vec<WoopsaMethodArgumentInfo>,
+    pub return_type: WoopsaValueType,
 }
 
-struct WoopsaMethod {
+impl WoopsaMethod {}
 
-}
-
-impl Method for WoopsaMethod {
-
-}
+impl Method for WoopsaMethod {}

@@ -1,8 +1,3 @@
+struct Subscription {}
 
-struct Subscription {
-
-}
-
-impl Subscription {
-
-}
+impl Subscription {}

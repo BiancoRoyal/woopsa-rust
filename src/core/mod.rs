@@ -1,12 +1,11 @@
 pub mod container;
 pub mod element;
 pub mod method;
-pub mod methodargumentinfo;
+pub mod method_argument_info;
 pub mod object;
 pub mod property;
 pub mod types;
 pub mod value;
-
 
 #[cfg(test)]
 mod tests {

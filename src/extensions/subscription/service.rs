@@ -1,5 +1,3 @@
+struct SubscriptionService;
 
-
-impl SubscriptionService {
-
-}
+impl SubscriptionService {}
