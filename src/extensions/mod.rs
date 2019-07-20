@@ -1,8 +1,6 @@
-
-pub mod core;
-pub mod extensions;
-pub mod client;
-pub mod server;
+pub mod request;
+pub mod subscription;
+pub mod utils;
 
 #[cfg(test)]
 mod tests {
