@@ -48,44 +48,11 @@ As a node module, Woopsa is very useful if you wish to quickly create a RESTful 
 On the server-side, just give Woopsa any JavaScript object with properties and functions, 
 and the library will create a RESTful API allowing you to read/write properties and call functions, automagically!
 
-````js
-var woopsa = require('woopsa');
-var weatherStation = {
-    Temperature: 24.2,
-    IsRaining: false,
-    Sensitivity: 0.5,
-    Altitude: 430,
-    City: "Geneva",
-    Time: new Date(),
-    GetWeatherAtDate: function (date){
-        var date = new Date(date);
-        if ( date.getDay() === 1 ) // monday?
-            return "rainy";
-        else
-            return "sunny";
-    },
-    Thermostat: {
-        SetPoint: 24.0
-    }
-}
-var server = new woopsa.Server(weatherStation, {port: 80});
-````
-
 To give it a test, just go on `http://{ip-of-your-server}/woopsa/read/Temperature` and see the magic! 
 Woopsa is fully RESTful which means you can easily test it with your browser. 
 It publishes your entire object's structure, and you can see all the data it publishes by going on `http://{ip-of-your-server}/woopsa/meta/` .
 
 On the client-side, just get the Woopsa library on http://www.woopsa.org and you can immediately work with your object:
-
-````js
-var woopsa = new WoopsaClient("http://{ip-of-your-server}/woopsa", jQuery);
-woopsa.read("/Temperature", function(result){
-//result = 24.2
-});
-woopsa.invoke("/GetWeatherAtDate", {date: new Date(2016,0,1)}, function(result){
-//result = sunny (jan. 1st of 2016 was not a monday)
-} 
-````
 
 ## Getting started
 Our [Getting Started](http://www.woopsa.org/get-started/) tutorial allows you to get started quickly with Woopsa. 
