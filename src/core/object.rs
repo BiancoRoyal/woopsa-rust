@@ -1,7 +1,7 @@
 use crate::core::method::WoopsaMethod;
 use crate::core::property::WoopsaProperty;
-use crate::core::types::WoopsaValueType;
 use crate::core::value::WoopsaValue;
+use crate::core::value_type::WoopsaValueType;
 use std::time::SystemTime;
 
 pub trait Object {

@@ -1,7 +1,7 @@
 use crate::core::element::Element;
 use crate::core::element::WoopsaElement;
-use crate::core::types::WoopsaValueType;
 use crate::core::value::WoopsaValue;
+use crate::core::value_type::WoopsaValueType;
 
 pub trait Property {
     fn is_read_only(&self) -> bool;

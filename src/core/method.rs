@@ -1,5 +1,5 @@
 use crate::core::method_argument_info::WoopsaMethodArgumentInfo;
-use crate::core::types::WoopsaValueType;
+use crate::core::value_type::WoopsaValueType;
 
 pub trait Method {}
 

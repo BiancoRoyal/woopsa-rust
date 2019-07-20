@@ -1,4 +1,4 @@
-use crate::core::types::WoopsaValueType;
+use crate::core::value_type::WoopsaValueType;
 use std::time::SystemTime;
 
 pub trait Value {}
