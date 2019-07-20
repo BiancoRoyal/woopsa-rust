@@ -9,6 +9,12 @@ A pure Rust library for [Woopsa](http://www.woopsa.org/).
 
 ## Features
 
+<img src="./Logos/SVG/WoopsaLogo.svg" width="200"></img>
+
+Woopsa stands for Web Object-Oriented Protocol for Software and Automation.
+It was designed with simplicity and interoperability in mind.
+The object-oriented part of the name means that data in Woopsa is hierarchical.
+
 ## Install
 
 ## Contributing
