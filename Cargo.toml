@@ -8,6 +8,7 @@ description="A pure Rust library for Woopsa."
 keywords = ["woopsa", "fieldbus", "iiot", "opcua", "automation", "bacnet", "modbus"]
 homepage = "https://bianco-royal.cloud/"
 readme = "README.md"
+edition = "2018"
 
 [dependencies]
 
