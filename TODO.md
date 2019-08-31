@@ -20,6 +20,12 @@
 
 - Websocket
 - Hyper
+- soliciti
+
+## JSON
+
+- serde
+- json
 
 ## Extension implementation
 
