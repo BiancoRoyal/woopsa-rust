@@ -1,3 +1,4 @@
+use crate::protocol::container::WoopsaContainer;
 use crate::protocol::method::WoopsaMethod;
 use crate::protocol::property::WoopsaProperty;
 use crate::protocol::value::WoopsaValue;
@@ -9,11 +10,13 @@ pub trait Object {
 }
 
 pub struct WoopsaObject {
+    container: WoopsaContainer,
     pub properties: Vec<WoopsaProperty>,
     pub methods: Vec<WoopsaMethod>,
 }
 
-impl WoopsaObject {}
+impl WoopsaObject {
+}
 
 impl Object for WoopsaObject {
     fn invoke(&self) -> WoopsaValue {

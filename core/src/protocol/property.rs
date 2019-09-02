@@ -18,6 +18,6 @@ impl WoopsaProperty {}
 
 impl Property for WoopsaProperty {
     fn is_read_only(&self) -> bool {
-        return self.readonly;
+        return self.readonly.clone();
     }
 }
