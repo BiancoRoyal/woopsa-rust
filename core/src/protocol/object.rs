@@ -10,7 +10,7 @@ pub trait Object {
 }
 
 pub struct WoopsaObject {
-    container: WoopsaContainer,
+    pub container: WoopsaContainer,
     pub properties: Vec<WoopsaProperty>,
     pub methods: Vec<WoopsaMethod>,
 }
