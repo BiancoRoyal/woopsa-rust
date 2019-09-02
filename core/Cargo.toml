@@ -1,0 +1,18 @@
+[package]
+name = "woopsa"
+version = "0.1.0"
+authors = ["Bianco Royal Developers <developers@bianco-royal.de>"]
+repository = "https://github.com/BiancoRoyal/woopsa-rust.git"
+license = "MPL-2.0"
+description="A pure Rust library for Woopsa."
+keywords = ["woopsa", "fieldbus", "iiot", "opcua", "automation", "bacnet", "modbus"]
+homepage = "https://bianco-royal.cloud/"
+readme = "README.md"
+edition = "2018"
+
+[dependencies]
+json = "*"
+
+[badges]
+travis-ci = { repository = "BiancoRoyal/woopsa-rust" }
+coveralls = { repository = "BiancoRoyal/woopsa-rust", branch = "master", service = "github" }

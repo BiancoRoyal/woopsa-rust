@@ -1,31 +1,16 @@
-[package]
-name = "woopsa"
-version = "0.1.0"
-authors = ["Bianco Royal Developers <developers@bianco-royal.de>"]
-repository = "https://github.com/BiancoRoyal/woopsa-rust.git"
-license = "MPL-2.0"
-description="A pure Rust library for Woopsa."
-keywords = ["woopsa", "fieldbus", "iiot", "opcua", "automation", "bacnet", "modbus"]
-homepage = "https://bianco-royal.cloud/"
-readme = "README.md"
-edition = "2018"
+# These settings are present to demonstrate minimal binary size in release mode.
+# Don't forget to strip the executable too.
+[profile.release]
+opt-level = 'z'
+lto = true
+panic = 'abort'
 
-[dependencies]
-solicit = "*"
-json = "*"
-
-[badges]
-travis-ci = { repository = "BiancoRoyal/woopsa-rust" }
-coveralls = { repository = "BiancoRoyal/woopsa-rust", branch = "master", service = "github" }
-
-[lib]
-name="woopsa"
-path="src/lib.rs"
-
-#[[bin]]
-#name="client"
-#path="src/bin/client.rs"
-
-#[[bin]]
-#name="server"
-#path="src/bin/server.rs"
+[workspace]
+members = [
+    "core",
+    "http2",
+    "client",
+    "server",
+    "examples/client",
+    "examples/server"
+]

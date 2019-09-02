@@ -1,0 +1,30 @@
+[package]
+name = "woopsa-server-example"
+version = "0.1.0"
+authors = ["Bianco Royal Developers <developers@bianco-royal.de>"]
+repository = "https://github.com/BiancoRoyal/woopsa-rust.git"
+license = "MPL-2.0"
+description="A pure Rust Woopsa server."
+keywords = ["woopsa", "fieldbus", "iiot", "opcua", "automation", "bacnet", "modbus"]
+homepage = "https://bianco-royal.cloud/"
+readme = "README.md"
+edition = "2018"
+
+[dependencies]
+json = "*"
+
+[dependencies.woopsa]
+path = "../../core"
+version = "0.1.0"
+
+[dependencies.woopsa-http2]
+path = "../../http2"
+version = "0.1.0"
+
+[dependencies.woopsa-server]
+path = "../../server"
+version = "0.1.0"
+
+[badges]
+travis-ci = { repository = "BiancoRoyal/woopsa-rust" }
+coveralls = { repository = "BiancoRoyal/woopsa-rust", branch = "master", service = "github" }

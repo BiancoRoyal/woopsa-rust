@@ -1,7 +1,5 @@
-pub mod client;
-pub mod core;
 pub mod extensions;
-pub mod server;
+pub mod protocol;
 
 #[cfg(test)]
 mod tests {
