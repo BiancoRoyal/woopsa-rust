@@ -7,10 +7,10 @@ panic = 'abort'
 
 [workspace]
 members = [
-    "core",
-    "http2",
     "client",
-    "server",
+    "core",
     "examples/client",
-    "examples/server"
+    "examples/server",
+    "http2",
+    "server"
 ]
