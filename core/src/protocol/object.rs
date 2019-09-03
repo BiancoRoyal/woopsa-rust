@@ -1,5 +1,4 @@
 use crate::protocol::container::WoopsaContainer;
-use crate::protocol::element::WoopsaElement;
 use crate::protocol::method::WoopsaMethod;
 use crate::protocol::property::WoopsaProperty;
 
@@ -10,7 +9,6 @@ pub trait Object {
 }
 
 pub struct WoopsaObject {
-    pub element: WoopsaElement,
     pub container: WoopsaContainer,
     pub properties: HashMap<String, WoopsaProperty>,
     pub methods: HashMap<String, WoopsaMethod>,
@@ -18,11 +16,19 @@ pub struct WoopsaObject {
 
 impl WoopsaObject {
     pub fn name(&self) -> String {
-        return self.element.name.clone();
+        return self.container.element.name.clone();
     }
 
     pub fn register_container(&mut self, container: WoopsaContainer) {
         self.container = container;
+    }
+
+    pub fn insert_item(&mut self, item: WoopsaObject) {
+        self.container.insert_item(item);
+    }
+
+    pub fn remove_item(&mut self, item: WoopsaObject) {
+        self.container.remove_item(item);
     }
 
     pub fn add_property(&mut self, property: WoopsaProperty) {
@@ -39,6 +45,10 @@ impl WoopsaObject {
 
     pub fn remove_method(&mut self, method: WoopsaMethod) {
         self.methods.remove(&(method.element.name));
+    }
+
+    pub fn find_item_by_name(&self, name: String) -> &WoopsaObject {
+        return self.container.items.get(&name).unwrap();
     }
 
     pub fn find_property_by_name(&self, name: String) -> &WoopsaProperty {

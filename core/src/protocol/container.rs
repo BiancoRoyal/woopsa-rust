@@ -1,4 +1,5 @@
 use crate::protocol::element::WoopsaElement;
+use crate::protocol::object::WoopsaObject;
 
 use std::collections::HashMap;
 
@@ -9,7 +10,7 @@ trait Container {
 
 pub struct WoopsaContainer {
     pub element: WoopsaElement,
-    pub items: HashMap<String, WoopsaContainer>
+    pub items: HashMap<String, WoopsaObject>
 }
 
 impl WoopsaContainer {
@@ -17,16 +18,12 @@ impl WoopsaContainer {
         return self.element.name.clone();
     }
 
-    pub fn insert_item(&mut self, item: WoopsaContainer) {
-        self.items.insert(item.element.name.clone(), item);
+    pub fn insert_item(&mut self, item: WoopsaObject) {
+        self.items.insert(item.container.element.name.clone(), item);
     }
 
-    pub fn get_item(&mut self, name: String) {
-        self.items.get(&name);
-    }
-
-    pub fn remove_item(&mut self, item: WoopsaContainer) {
-        self.items.remove(&(item.element.name));
+    pub fn remove_item(&mut self, item: WoopsaObject) {
+        self.items.remove(&(item.container.element.name));
     }
 
     pub fn clear(&mut self) {
