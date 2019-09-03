@@ -1,4 +1,5 @@
 use crate::protocol::container::WoopsaContainer;
+use crate::protocol::element::WoopsaElement;
 use crate::protocol::method::WoopsaMethod;
 use crate::protocol::property::WoopsaProperty;
 
@@ -9,6 +10,7 @@ pub trait Object {
 }
 
 pub struct WoopsaObject {
+    pub element: WoopsaElement,
     pub container: WoopsaContainer,
     pub properties: HashMap<String, WoopsaProperty>,
     pub methods: HashMap<String, WoopsaMethod>,
@@ -16,7 +18,7 @@ pub struct WoopsaObject {
 
 impl WoopsaObject {
     pub fn name(&self) -> String {
-        return self.container.name();
+        return self.element.name.clone();
     }
 
     pub fn register_container(&mut self, container: WoopsaContainer) {
