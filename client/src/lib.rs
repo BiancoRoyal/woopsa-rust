@@ -1,5 +1,20 @@
 extern crate woopsa;
 
-struct WoopsaClient {}
+pub mod core;
 
-impl WoopsaClient {}
+use crate::core::client_type::WoopsaClientType;
+
+trait Client {
+    fn send_request();
+}
+
+struct WoopsaClient {
+    server_url: String,
+    client_type: WoopsaClientType
+}
+
+impl WoopsaClient {
+    fn send_request() {
+        // Todo
+    }
+}

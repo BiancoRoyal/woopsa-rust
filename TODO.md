@@ -10,22 +10,28 @@
 - Object
 - Property
 - Types
+  - Value
+  - Error
 - Value
+- Link
+- URL
+- Verb
 
 ## Network communication
 
+- Std
 - MIO
 
 ## Web communication
 
+- Soliciti
 - Websocket
 - Hyper
-- soliciti
 
 ## JSON
 
-- serde
 - json
+- serde
 
 ## Extension implementation
 
@@ -48,4 +54,3 @@
 - Server
 - Client
 - Examples
-  - actix web

@@ -1,13 +1,16 @@
-pub trait Element {}
+pub trait Element {
+    fn type_of(&self) -> &'static str;
+}
 
 pub struct WoopsaElement {
     pub name: String,
 }
 
 impl WoopsaElement {
-    fn new(&mut self, name: String) {
-        self.name = name;
-    }
 }
 
-impl Element for WoopsaElement {}
+impl Element for WoopsaElement {
+    fn type_of(&self) -> &'static str {
+        "WoopsaElement"
+    }
+}

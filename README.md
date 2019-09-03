@@ -23,19 +23,24 @@ Let's work together - send us your pull request!
 
 ### TODO
 
+* tests (TDD)
 * stack
-* tests
+* server
+* client
 * documentation
 * examples
+    * server
+    * client
 * automated release process
 
 ## Authors
-[Klaus Landsdorf][1]
+[Klaus Landsdorf][1] from company [Bianco Royal Software Innovations][2]
 
 ## License
 The code is licenced under [MPL-2.0](https://opensource.org/licenses/MPL-2.0). Like all open source code, you use this code at your own risk.
 
 [1]:https://github.com/biancode
+[2]:https://bianco-royal.cloud/
 
 
 
