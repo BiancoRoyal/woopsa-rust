@@ -27,8 +27,16 @@ impl WoopsaObject {
         self.properties.insert(property.element.name.clone(), property);
     }
 
+    pub fn remove_property(&mut self, property: WoopsaProperty) {
+        self.properties.remove(&(property.element.name));
+    }
+
     pub fn add_method(&mut self, method: WoopsaMethod) {
         self.methods.insert(method.element.name.clone(), method);
+    }
+
+    pub fn remove_method(&mut self, method: WoopsaMethod) {
+        self.methods.remove(&(method.element.name));
     }
 
     pub fn find_property_by_name(&self, name: String) -> &WoopsaProperty {
