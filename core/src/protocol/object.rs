@@ -1,8 +1,11 @@
+
+use crate::protocol::element::WoopsaElement;
 use crate::protocol::container::WoopsaContainer;
 use crate::protocol::method::WoopsaMethod;
 use crate::protocol::property::WoopsaProperty;
 
 use std::collections::HashMap;
+use std::fmt;
 
 pub trait Object {
     fn type_of(&self) -> &'static str;
@@ -15,6 +18,19 @@ pub struct WoopsaObject {
 }
 
 impl WoopsaObject {
+    pub fn new(element_name: String) -> WoopsaObject {
+        WoopsaObject {
+            container: WoopsaContainer {
+                element: WoopsaElement {
+                    name: element_name,
+                },
+                items: HashMap::new(),
+            },
+            properties: HashMap::new(),
+            methods: HashMap::new(),
+        }
+    }
+
     pub fn name(&self) -> String {
         return self.container.element.name.clone();
     }
@@ -69,5 +85,15 @@ impl WoopsaObject {
 impl Object for WoopsaObject {
     fn type_of(&self) -> &'static str {
         "WoopsaObject"
+    }
+}
+
+impl fmt::Display for WoopsaObject {
+    fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
+        write!(f, "({} with items count {}, properties count {}, and methods count {})", 
+        self.container.element.name,
+        self.container.items.len(),
+        self.properties.len(),
+        self.methods.len())
     }
 }

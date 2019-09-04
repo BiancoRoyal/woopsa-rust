@@ -14,10 +14,7 @@ pub mod verb;
 
 #[cfg(test)]
 mod tests {
-    use crate::protocol::container::WoopsaContainer;
-    use crate::protocol::element::WoopsaElement;
     use crate::protocol::object::WoopsaObject;
-    use std::collections::HashMap;
 
     #[test]
     fn it_works() {
@@ -26,31 +23,23 @@ mod tests {
 
     #[test]
     fn it_build_simple_model() {
-        let mut root = WoopsaObject {
-            container: WoopsaContainer {
-                element: WoopsaElement {
-                    name: String::from("Root"),
-                },
-                items: HashMap::new(),
-            },
-            properties: HashMap::new(),
-            methods: HashMap::new(),
-        };
+        let mut root = WoopsaObject::new(String::from("Root"));
+        root.container.insert_item(WoopsaObject::new(String::from("Server")));
+        
+        let mut objects = WoopsaObject::new(String::from("Objects"));
+        objects.container.insert_item(WoopsaObject::new(String::from("Devices")));
+        objects.container.insert_item(WoopsaObject::new(String::from("Models")));
 
-        let objects = WoopsaObject {
-            container: WoopsaContainer {
-                element: WoopsaElement {
-                    name: String::from("Objects"),
-                },
-                items: HashMap::new(),
-            },
-            properties: HashMap::new(),
-            methods: HashMap::new(),
-        };
+        println!("/root/ is {}", &root);
+        for (key, value) in &(root.container.items) {
+            println!("item of root -> {}: {}", key, value);
+        }
 
-        root.container.insert_item(objects);
+        println!("/root/objects/ is {}", &objects);
+        for (key, value) in &(objects.container.items) {
+            println!("item of objects -> {}: {}", key, value);
+        }
 
-        let objects = root.find_item_by_name(String::from("Objects"));
         assert_eq!(objects.name(), String::from("Objects"));
     }
 }
