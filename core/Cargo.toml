@@ -1,6 +1,6 @@
 [package]
 name = "woopsa"
-version = "0.1.0"
+version = "0.1.1"
 authors = ["Bianco Royal Developers <developers@bianco-royal.de>"]
 repository = "https://github.com/BiancoRoyal/woopsa-rust.git"
 license = "MPL-2.0"
