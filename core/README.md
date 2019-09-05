@@ -24,7 +24,7 @@ This woopsa library is a core library to just provide:
 * verb
 * link (optional)
 
-<img src="./assets/Logos/PNG/Black/WoopsaLogo.png" width="320"></img>
+<img src="../assets/Logos/PNG/Black/WoopsaLogo.png" width="320"></img>
 
 Woopsa stands for Web Object-Oriented Protocol for Software and Automation.
 It was designed with simplicity and interoperability in mind.
