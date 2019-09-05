@@ -47,7 +47,7 @@ mod tests {
 
     #[test]
     fn it_build_weatherstation_model() {
-        let mut root = WoopsaObject::new(String::from("Root"));
+        let mut root = WoopsaObject::root();
         let mut objects = WoopsaObject::new(String::from("Objects"));
         
         let mut weather_station = WoopsaObject::new(String::from("WeatherStation"));

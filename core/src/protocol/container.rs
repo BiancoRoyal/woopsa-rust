@@ -2,8 +2,10 @@ use serde::{Deserialize, Serialize};
 
 use crate::protocol::element::WoopsaElement;
 use crate::protocol::object::WoopsaObject;
+use crate::protocol::constant::*;
 
 use std::collections::HashMap;
+use std::fmt;
 
 trait Container {
     fn type_of(&self) -> &'static str;
@@ -22,7 +24,7 @@ impl WoopsaContainer {
     }
 
     pub fn insert_item(&mut self, item: WoopsaObject) {
-        self.items.insert(item.container.element.name.clone(), item);
+        self.items.insert(item.name().clone(), item);
     }
 
     pub fn remove_item(&mut self, item: WoopsaObject) {
@@ -41,5 +43,13 @@ impl Container for WoopsaContainer {
 
     fn clear(&mut self) {
         self.clear();
+    }
+}
+
+impl fmt::Display for WoopsaContainer {
+    fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
+        write!(f, "(container {} with items count {})", 
+        self.name(),
+        self.items.len())
     }
 }

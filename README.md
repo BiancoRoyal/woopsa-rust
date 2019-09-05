@@ -17,6 +17,8 @@ The object-oriented part of the name means that data in Woopsa is hierarchical.
 
 ## Install
 
+    cargo install woopsa
+
 ## Contributing
 
 Let's work together - send us your pull request!
@@ -24,10 +26,11 @@ Let's work together - send us your pull request!
 ### TODO
 
 * tests (TDD)
-* stack
+* protocol stack
 * server
 * client
 * documentation
+* website
 * examples
     * server
     * client
