@@ -1,5 +1,4 @@
 pub mod request;
-pub mod subscription;
 pub mod utils;
 
 #[cfg(test)]

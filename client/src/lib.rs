@@ -1,6 +1,7 @@
 extern crate woopsa;
 
 pub mod core;
+pub mod extension;
 
 use crate::core::client_type::WoopsaClientType;
 

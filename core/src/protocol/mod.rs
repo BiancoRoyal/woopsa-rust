@@ -17,7 +17,6 @@ mod tests {
     use crate::protocol::object::WoopsaObject;
     use crate::protocol::property::WoopsaProperty;
     use crate::protocol::value_type::WoopsaValueType;
-    use std::time::SystemTime;
 
     #[test]
     fn it_works() {

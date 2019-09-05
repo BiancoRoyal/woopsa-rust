@@ -1,6 +1,7 @@
 extern crate woopsa;
 
 pub mod core;
+pub mod extension;
 
 use crate::core::request_handler::WoopsaRequestHandler;
 use crate::core::check_request_type::WoopsaCheckRequestType;
