@@ -12,19 +12,19 @@ edition = "2018"
 
 [dependencies.woopsa]
 path = "../../core"
-version = "0.1.*"
+version = "0.1"
 
 [dependencies.woopsa-http]
 path = "../../http"
-version = "0.1.*"
+version = "0.1"
 
 [dependencies.woopsa-http2]
 path = "../../http2"
-version = "0.1.*"
+version = "0.1"
 
 [dependencies.woopsa-client]
 path = "../../client"
-version = "0.1.*"
+version = "0.1"
 
 [badges]
 travis-ci = { repository = "BiancoRoyal/woopsa-rust" }

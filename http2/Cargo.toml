@@ -11,11 +11,11 @@ readme = "README.md"
 edition = "2018"
 
 [dependencies]
-solicit = "*"
+solicit = "0.4"
 
 [dependencies.woopsa]
 path = "../core"
-version = "0.1.*"
+version = "0.1"
 
 [badges]
 travis-ci = { repository = "BiancoRoyal/woopsa-rust" }
