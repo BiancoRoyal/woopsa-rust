@@ -148,7 +148,6 @@ impl WoopsaObject {
             let mut names: Vec<&str> = item_path.split(WOOPSA_PATH_SEPARATOR).collect();
             names.reverse();
             let first_path = names.pop().unwrap();
-            println!("first_path: {}", first_path.clone());
             if first_path.is_empty() {
                 name.push(WOOPSA_PATH_SEPARATOR);
                 name.push_str(names.pop().unwrap());
@@ -158,25 +157,16 @@ impl WoopsaObject {
         } else {
             name.push_str(item_path.as_str());
         }
+        
         let next_item_path = item_path.replace(name.as_str(), "");
-        println!(
-            "{} name: {} next is {}",
-            self.name(),
-            name.clone(),
-            next_item_path.clone()
-        );
-
         if name.contains(WOOPSA_PATH_SEPARATOR) || next_item_path.contains(WOOPSA_PATH_SEPARATOR) {
             let next_group_item = self.find_item_by_name(name.replace(WOOPSA_PATH_SEPARATOR, ""));
             if next_item_path.is_empty() {
-                println!("simple find next group item {}", name);
                 next_group_item
             } else {
-                println!("go depper for hierarchy {}", next_item_path.clone());
                 next_group_item.get_item_by_path(next_item_path)
             }
         } else {
-            println!("simple find item {}", name);
             self.find_item_by_name(name)
         }
     }
