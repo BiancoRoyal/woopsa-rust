@@ -1,4 +1,4 @@
-pub mod extensions;
+pub mod json;
 pub mod protocol;
 
 #[cfg(test)]

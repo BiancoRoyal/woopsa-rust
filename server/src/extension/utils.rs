@@ -1,5 +1,6 @@
-use crate::protocol::value::WoopsaValue;
-use crate::protocol::value_type::WoopsaValueType;
+extern crate woopsa;
+
+use crate::woopsa::protocol::value::WoopsaValue;
 
 struct WoopsaServerUtils {}
 
