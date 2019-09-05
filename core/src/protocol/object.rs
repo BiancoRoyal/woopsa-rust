@@ -1,10 +1,10 @@
 use serde::{Deserialize, Serialize};
 
-use crate::protocol::element::WoopsaElement;
+use crate::protocol::constant::*;
 use crate::protocol::container::WoopsaContainer;
+use crate::protocol::element::WoopsaElement;
 use crate::protocol::method::WoopsaMethod;
 use crate::protocol::property::WoopsaProperty;
-use crate::protocol::constant::*;
 
 use std::collections::HashMap;
 use std::fmt;
@@ -18,21 +18,19 @@ pub struct WoopsaObject {
     pub container: WoopsaContainer,
     pub properties: HashMap<String, WoopsaProperty>,
     pub methods: HashMap<String, WoopsaMethod>,
-    is_root_object: bool
+    is_root_object: bool,
 }
 
 impl WoopsaObject {
     pub fn new(element_name: String) -> WoopsaObject {
         WoopsaObject {
             container: WoopsaContainer {
-                element: WoopsaElement {
-                    name: element_name,
-                },
+                element: WoopsaElement { name: element_name },
                 items: HashMap::new(),
             },
             properties: HashMap::new(),
             methods: HashMap::new(),
-            is_root_object: false
+            is_root_object: false,
         }
     }
 
@@ -46,7 +44,7 @@ impl WoopsaObject {
             },
             properties: HashMap::new(),
             methods: HashMap::new(),
-            is_root_object: true
+            is_root_object: true,
         }
     }
 
@@ -79,7 +77,8 @@ impl WoopsaObject {
     }
 
     pub fn add_property(&mut self, property: WoopsaProperty) {
-        self.properties.insert(property.element.name.clone(), property);
+        self.properties
+            .insert(property.element.name.clone(), property);
     }
 
     pub fn remove_property(&mut self, property: WoopsaProperty) {
@@ -131,9 +130,55 @@ impl WoopsaObject {
             path.push(WOOPSA_PATH_SEPARATOR);
             path.push_str(self.find_item_by_name(item_name).name().as_str());
         } else {
-            path.push(WOOPSA_ROOT_PATH);
+            if WOOPSA_ROOT_PATH.eq_ignore_ascii_case(&WOOPSA_PATH_SEPARATOR) {
+                path.push(WOOPSA_ROOT_PATH);
+            } else {
+                path.push(WOOPSA_ROOT_PATH);
+                path.push(WOOPSA_PATH_SEPARATOR);
+            }
+            path.push_str(self.find_item_by_name(item_name).name().as_str());
         }
         path
+    }
+
+    pub fn get_item_by_path(&self, item_path: String) -> &WoopsaObject {
+        let mut name = String::new();
+
+        if item_path.contains(WOOPSA_PATH_SEPARATOR) {
+            let mut names: Vec<&str> = item_path.split(WOOPSA_PATH_SEPARATOR).collect();
+            names.reverse();
+            let first_path = names.pop().unwrap();
+            println!("first_path: {}", first_path.clone());
+            if first_path.is_empty() {
+                name.push(WOOPSA_PATH_SEPARATOR);
+                name.push_str(names.pop().unwrap());
+            } else {
+                name.push_str(first_path);
+            }
+        } else {
+            name.push_str(item_path.as_str());
+        }
+        let next_item_path = item_path.replace(name.as_str(), "");
+        println!(
+            "{} name: {} next is {}",
+            self.name(),
+            name.clone(),
+            next_item_path.clone()
+        );
+
+        if name.contains(WOOPSA_PATH_SEPARATOR) || next_item_path.contains(WOOPSA_PATH_SEPARATOR) {
+            let next_group_item = self.find_item_by_name(name.replace(WOOPSA_PATH_SEPARATOR, ""));
+            if next_item_path.is_empty() {
+                println!("simple find next group item {}", name);
+                next_group_item
+            } else {
+                println!("go depper for hierarchy {}", next_item_path.clone());
+                next_group_item.get_item_by_path(next_item_path)
+            }
+        } else {
+            println!("simple find item {}", name);
+            self.find_item_by_name(name)
+        }
     }
 }
 
@@ -145,11 +190,14 @@ impl Object for WoopsaObject {
 
 impl fmt::Display for WoopsaObject {
     fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
-        write!(f, "(object named {} with items count {}, properties count {}, and methods count {})", 
-        self.name(),
-        self.container.items.len(),
-        self.properties.len(),
-        self.methods.len())
+        write!(
+            f,
+            "(object named {} with items count {}, properties count {}, and methods count {})",
+            self.name(),
+            self.container.items.len(),
+            self.properties.len(),
+            self.methods.len()
+        )
     }
 }
 
@@ -171,7 +219,6 @@ fn it_should_get_woopsaobject_path_in_hierarchy() {
     let mut objects = WoopsaObject::new(String::from("Objects"));
     objects.insert_item(WoopsaObject::new(String::from("WeatherStation")));
     root.insert_item(objects);
-    
     let objects = root.find_item_by_name(String::from("Objects"));
     let weather_station = objects.find_item_by_name(String::from("WeatherStation"));
     assert_eq!(weather_station.get_path(), "/WeatherStation");
@@ -183,7 +230,51 @@ fn it_should_get_woopsaobject_item_path_in_hierarchy() {
     let mut objects = WoopsaObject::new(String::from("Objects"));
     objects.insert_item(WoopsaObject::new(String::from("WeatherStation")));
     root.insert_item(objects);
-    
     let objects = root.find_item_by_name(String::from("Objects"));
-    assert_eq!(objects.get_item_path(String::from("WeatherStation")), "/Objects/WeatherStation");
+    assert_eq!(
+        objects.get_item_path(String::from("WeatherStation")),
+        "/Objects/WeatherStation"
+    );
+}
+
+#[test]
+fn it_should_get_woopsaobject_item_path_from_root() {
+    let mut root = WoopsaObject::root();
+    let mut objects = WoopsaObject::new(String::from("Objects"));
+    objects.insert_item(WoopsaObject::new(String::from("WeatherStation")));
+    root.insert_item(objects);
+    assert_eq!(root.get_item_path(String::from("Objects")), "/Objects");
+}
+
+#[test]
+fn it_should_get_woopsaobject_item_by_root_path_from_hierarchy() {
+    let mut root = WoopsaObject::root();
+    let mut objects = WoopsaObject::new(String::from("Objects"));
+    let mut weatherstation = WoopsaObject::new(String::from("WeatherStation"));
+    weatherstation.insert_item(WoopsaObject::new(String::from("Thermostat")));
+    objects.insert_item(weatherstation);
+    root.insert_item(objects);
+    assert_eq!(
+        root.get_item_by_path(String::from("/Objects/WeatherStation/Thermostat"))
+            .name(),
+        String::from("Thermostat")
+    );
+}
+
+#[test]
+fn it_should_get_woopsaobject_item_by_path_from_hierarchy() {
+    let mut root = WoopsaObject::root();
+    let mut objects = WoopsaObject::new(String::from("Objects"));
+    let mut weatherstation = WoopsaObject::new(String::from("WeatherStation"));
+    weatherstation.insert_item(WoopsaObject::new(String::from("Thermostat")));
+    objects.insert_item(weatherstation);
+    root.insert_item(objects);
+
+    let objects = root.find_item_by_name(String::from("Objects"));
+    assert_eq!(
+        objects
+            .get_item_by_path(String::from("WeatherStation/Thermostat"))
+            .name(),
+        String::from("Thermostat")
+    );
 }
