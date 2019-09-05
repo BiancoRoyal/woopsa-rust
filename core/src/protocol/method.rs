@@ -1,3 +1,5 @@
+use serde::{Deserialize, Serialize};
+
 use crate::protocol::element::WoopsaElement;
 use crate::protocol::method_argument_info::WoopsaMethodArgumentInfo;
 use crate::protocol::value::WoopsaValue;
@@ -10,6 +12,7 @@ pub trait Method {
     fn invoke() -> WoopsaValue;
 }
 
+#[derive(Serialize, Deserialize)]
 pub struct WoopsaMethod {
     pub element: WoopsaElement,
     pub arguments: Vec<WoopsaMethodArgumentInfo>,

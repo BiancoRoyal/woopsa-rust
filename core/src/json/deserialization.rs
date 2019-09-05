@@ -1,14 +1,8 @@
-extern crate serde_json;
 
-trait Deserialization {
+trait WoopsaDeserialization {
 
 }
 
-struct WoopsaDeserialization {
-    input: serde_json::Value,
-    output: String
-}
-
-impl Deserialization for WoopsaDeserialization {
+impl WoopsaDeserialization {
 
 }

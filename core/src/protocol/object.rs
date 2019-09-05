@@ -1,3 +1,4 @@
+use serde::{Deserialize, Serialize};
 
 use crate::protocol::element::WoopsaElement;
 use crate::protocol::container::WoopsaContainer;
@@ -11,6 +12,7 @@ pub trait Object {
     fn type_of(&self) -> &'static str;
 }
 
+#[derive(Serialize, Deserialize)]
 pub struct WoopsaObject {
     pub container: WoopsaContainer,
     pub properties: HashMap<String, WoopsaProperty>,

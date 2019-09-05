@@ -1,3 +1,5 @@
+use serde::{Deserialize, Serialize};
+
 use crate::protocol::element::WoopsaElement;
 use crate::protocol::object::WoopsaObject;
 
@@ -8,6 +10,7 @@ trait Container {
     fn clear(&mut self); 
 }
 
+#[derive(Serialize, Deserialize)]
 pub struct WoopsaContainer {
     pub element: WoopsaElement,
     pub items: HashMap<String, WoopsaObject>

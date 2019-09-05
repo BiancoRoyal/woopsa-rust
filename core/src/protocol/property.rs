@@ -1,3 +1,5 @@
+use serde::{Deserialize, Serialize};
+
 use crate::protocol::element::WoopsaElement;
 use crate::protocol::value::WoopsaValue;
 use crate::protocol::value_type::WoopsaValueType;
@@ -11,6 +13,7 @@ pub trait Property {
     fn is_read_only(&self) -> bool;
 }
 
+#[derive(Serialize, Deserialize)]
 pub struct WoopsaProperty {
     pub element: WoopsaElement,
     pub value: WoopsaValue,

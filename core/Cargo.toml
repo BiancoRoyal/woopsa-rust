@@ -11,7 +11,7 @@ readme = "README.md"
 edition = "2018"
 
 [dependencies]
-serde_json = "*"
+serde = "*"
 
 [badges]
 travis-ci = { repository = "BiancoRoyal/woopsa-rust" }

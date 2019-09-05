@@ -1,9 +1,12 @@
+use serde::{Deserialize, Serialize};
+
 use crate::protocol::value_type::WoopsaValueType;
 use std::time::SystemTime;
 
 pub trait Value {
 }
 
+#[derive(Serialize, Deserialize)]
 pub struct WoopsaValue {
     pub as_text: String,
     pub timestamp: SystemTime,
