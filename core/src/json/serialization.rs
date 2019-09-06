@@ -1,8 +1,3 @@
+trait WoopsaSerialization {}
 
-trait WoopsaSerialization {
-
-}
-
-impl WoopsaSerialization {
-
-}
+impl WoopsaSerialization {}

@@ -1,8 +1,3 @@
+trait WoopsaDeserialization {}
 
-trait WoopsaDeserialization {
-
-}
-
-impl WoopsaDeserialization {
-
-}
+impl WoopsaDeserialization {}
