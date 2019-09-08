@@ -1,0 +1,25 @@
+digraph ml {
+    ndWoopsaMethod[label="{&lt;&lt;&lt;Structure&gt;&gt;&gt;\nWoopsaMethod|+ element: WoopsaElement\n+ arguments: HashMap&lt;String, WoopsaMethodArgumentInfo&gt;}"][shape="record"];
+    ndWoopsaVerb[label="{&lt;&lt;&lt;Enumeration&gt;&gt;&gt;\nWoopsaVerb|Meta\nRead\nWrite\nInvoke}"][shape="record"];
+    ndWoopsaErrorType[label="{&lt;&lt;&lt;Enumeration&gt;&gt;&gt;\nWoopsaErrorType|WoopsaException\nWoopsaNotFoundException\nWoopsaInvalidOperationException\nWoopsaNotificationsLostException\nWoopsaInvalidSubscriptionChannelException}"][shape="record"];
+    ndWoopsaContainer[label="{&lt;&lt;&lt;Structure&gt;&gt;&gt;\nWoopsaContainer|+ element: WoopsaElement\n+ items: HashMap&lt;String, WoopsaObject&gt; }"][shape="record"];
+    ndWoopsaValueType[label="{&lt;&lt;&lt;Enumeration&gt;&gt;&gt;\nWoopsaValueType|Null\nLogical\nInteger\nReal\nDateTime\nTimeSpan\nText\nWoopsaLink\nJsonData\nResourceUrl}"][shape="record"];
+    ndWoopsaObject[label="{&lt;&lt;&lt;Structure&gt;&gt;&gt;\nWoopsaObject|+ container: WoopsaContainer\n+ properties: HashMap&lt;String, WoopsaProperty&gt; }"][shape="record"];
+    ndWoopsaProperty[label="{&lt;&lt;&lt;Structure&gt;&gt;&gt;\nWoopsaProperty|+ element: WoopsaElement\n+ value: WoopsaValue\n+ value_type: WoopsaValueType\n+ readonly: bool }"][shape="record"];
+    ndWoopsaElement[label="{&lt;&lt;&lt;Structure&gt;&gt;&gt;\nWoopsaElement|+ name: String }"][shape="record"];
+    ndWoopsaMethodArgumentInfo[label="{&lt;&lt;&lt;Structure&gt;&gt;&gt;\nWoopsaMethodArgumentInfo|+ name: String\n+ value_type: WoopsaValueType }"][shape="record"];
+    ndWoopsaValue[label="{&lt;&lt;&lt;Structure&gt;&gt;&gt;\nWoopsaValue|+ as_text: String\n+ timestamp: SystemTime\n+ value_type: WoopsaValueType }"][shape="record"];
+    ndWoopsaMethod -> ndWoopsaObject[label=""][style="dashed"][arrowhead="vee"];
+    ndWoopsaContainer -> ndWoopsaObject[label=""][style="dashed"][arrowhead="diamond"];
+    ndWoopsaValueType -> ndWoopsaMethod[label=""][style="dashed"][arrowhead="diamond"];
+    ndWoopsaValueType -> ndWoopsaProperty[label=""][style="dashed"][arrowhead="diamond"];
+    ndWoopsaValueType -> ndWoopsaMethodArgumentInfo[label=""][style="dashed"][arrowhead="diamond"];
+    ndWoopsaValueType -> ndWoopsaValue[label=""][style="dashed"][arrowhead="diamond"];
+    ndWoopsaProperty -> ndWoopsaObject[label=""][style="dashed"][arrowhead="vee"];
+    ndWoopsaElement -> ndWoopsaMethod[label=""][style="dashed"][arrowhead="diamond"];
+    ndWoopsaElement -> ndWoopsaContainer[label=""][arrowhead="diamond"];
+    ndWoopsaElement -> ndWoopsaProperty[label=""][arrowhead="diamond"];
+    ndWoopsaMethodArgumentInfo -> ndWoopsaMethod[label=""][style="dashed"][arrowhead="vee"];
+    ndWoopsaValue -> ndWoopsaMethod[label=""][arrowhead="vee"];
+    ndWoopsaValue -> ndWoopsaProperty[label=""][arrowhead="diamond"];
+}
