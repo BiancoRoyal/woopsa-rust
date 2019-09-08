@@ -7,7 +7,6 @@ use crate::protocol::value::WoopsaValue;
 use crate::protocol::value_type::WoopsaValueType;
 
 use std::collections::HashMap;
-use std::time::SystemTime;
 
 pub trait Method {
     fn type_of(&self) -> WoopsaStructType;
@@ -59,10 +58,6 @@ impl Method for WoopsaMethod {
     }
 
     fn invoke() -> WoopsaValue {
-        WoopsaValue {
-            as_text: String::from("Null"),
-            timestamp: SystemTime::now(),
-            value_type: WoopsaValueType::Null,
-        }
+        WoopsaValue::new(String::from("Null"), WoopsaValueType::Null)
     }
 }

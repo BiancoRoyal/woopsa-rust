@@ -6,7 +6,6 @@ use crate::protocol::value::WoopsaValue;
 use crate::protocol::value_type::WoopsaValueType;
 
 use std::fmt;
-use std::time::SystemTime;
 
 pub trait Property {
     fn type_of(&self) -> WoopsaStructType;
@@ -31,12 +30,8 @@ impl WoopsaProperty {
     ) -> WoopsaProperty {
         WoopsaProperty {
             element: WoopsaElement { name: element_name },
-            value: WoopsaValue {
-                as_text: value,
-                timestamp: SystemTime::now(),
-                value_type: value_type,
-            },
-            value_type: value_type,
+            value: WoopsaValue::new(value, value_type),
+            value_type,
             readonly: true,
         }
     }
@@ -44,12 +39,8 @@ impl WoopsaProperty {
     pub fn new(element_name: String, value: String, value_type: WoopsaValueType) -> WoopsaProperty {
         WoopsaProperty {
             element: WoopsaElement { name: element_name },
-            value: WoopsaValue {
-                as_text: value,
-                timestamp: SystemTime::now(),
-                value_type: value_type,
-            },
-            value_type: value_type,
+            value: WoopsaValue::new(value, value_type),
+            value_type,
             readonly: false,
         }
     }
@@ -59,9 +50,7 @@ impl WoopsaProperty {
     }
 
     pub fn set_value(&mut self, value: String, value_type: WoopsaValueType) {
-        self.value.value_type = value_type;
-        self.value.as_text = value;
-        self.value.timestamp = SystemTime::now();
+        self.value = WoopsaValue::new(value, value_type);
     }
 
     pub fn get_value(&self) -> String {
