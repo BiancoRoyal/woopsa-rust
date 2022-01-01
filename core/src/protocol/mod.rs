@@ -26,19 +26,19 @@ mod tests {
     #[test]
     fn it_build_simple_model() {
         let mut root = WoopsaObject::new(String::from("Root"));
-        root.container.insert_item(WoopsaObject::new(String::from("Server")));
+        root.insert_item(WoopsaObject::new(String::from("Server")));
         
         let mut objects = WoopsaObject::new(String::from("Objects"));
-        objects.container.insert_item(WoopsaObject::new(String::from("Devices")));
-        objects.container.insert_item(WoopsaObject::new(String::from("Models")));
+        objects.insert_item(WoopsaObject::new(String::from("Devices")));
+        objects.insert_item(WoopsaObject::new(String::from("Models")));
 
         println!("/root/ is {}", &root);
-        for (key, value) in &(root.container.items) {
+        for (key, value) in &(root.items) {
             println!("item of root -> {}: {}", key, value);
         }
 
         println!("/root/objects/ is {}", &objects);
-        for (key, value) in &(objects.container.items) {
+        for (key, value) in &(objects.items) {
             println!("item of objects -> {}: {}", key, value);
         }
 
@@ -61,18 +61,18 @@ mod tests {
         let mut thermostat = WoopsaObject::new(String::from("Thermostat"));
         thermostat.add_property(WoopsaProperty::new_readonly(String::from("SetPoint"), String::from("24.0"), WoopsaValueType::Real));
         
-        weather_station.container.insert_item(thermostat);
-        objects.container.insert_item(weather_station);
-        root.container.insert_item(objects);
+        weather_station.insert_item(thermostat);
+        objects.insert_item(weather_station);
+        root.insert_item(objects);
 
         println!("/Root/ is {}", &root);
-        for (key, value) in &(root.container.items) {
+        for (key, value) in &(root.items) {
             println!("item of root -> {}: {}", key, value);
         }
 
         let objects = root.find_item_by_name(String::from("Objects"));
         println!("/Root/Objects/ is {}", &objects);
-        for (key, value) in &(objects.container.items) {
+        for (key, value) in &(objects.items) {
             println!("item of objects -> {}: {}", key, value);
         }
 
@@ -81,7 +81,7 @@ mod tests {
         for (key, value) in &(weather_station.properties) {
             println!("property of weather_station -> {}: {}", key, value);
         }
-        for (key, value) in &(weather_station.container.items) {
+        for (key, value) in &(weather_station.items) {
             println!("item of weather_station -> {}: {}", key, value);
         }
 

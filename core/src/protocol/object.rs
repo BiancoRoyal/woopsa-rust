@@ -1,8 +1,8 @@
 use serde::{Deserialize, Serialize};
 
 use crate::protocol::constant::*;
-use crate::protocol::container::WoopsaContainer;
-use crate::protocol::element::WoopsaElement;
+use crate::protocol::container::Container;
+use crate::protocol::element::Element;
 use crate::protocol::method::WoopsaMethod;
 use crate::protocol::property::WoopsaProperty;
 
@@ -10,40 +10,40 @@ use std::collections::HashMap;
 use std::fmt;
 
 pub trait Object {
-    fn type_of(&self) -> &'static str;
+    fn properties(&self) -> HashMap<String, WoopsaProperty>;
+    fn methods(&self) -> HashMap<String, WoopsaMethod>;
 }
 
-#[derive(Serialize, Deserialize)]
+#[derive(Serialize, Deserialize, Clone)]
 pub struct WoopsaObject {
-    pub container: WoopsaContainer,
-    pub properties: HashMap<String, WoopsaProperty>,
-    pub methods: HashMap<String, WoopsaMethod>,
+    pub name: String,
+    pub item_list: HashMap<String, WoopsaObject>,
+    pub property_list: HashMap<String, WoopsaProperty>,
+    pub method_list: HashMap<String, WoopsaMethod>,
     is_root_object: bool,
 }
 
 impl WoopsaObject {
+    fn type_of(&self) -> &'static str {
+        "WoopsaObject"
+    }
+
     pub fn new(element_name: String) -> WoopsaObject {
         WoopsaObject {
-            container: WoopsaContainer {
-                element: WoopsaElement { name: element_name },
-                items: HashMap::new(),
-            },
-            properties: HashMap::new(),
-            methods: HashMap::new(),
+            name: element_name,
+            item_list: HashMap::new(),
+            property_list: HashMap::new(),
+            method_list: HashMap::new(),
             is_root_object: false,
         }
     }
 
     pub fn root() -> WoopsaObject {
         WoopsaObject {
-            container: WoopsaContainer {
-                element: WoopsaElement {
-                    name: String::from(WOOPSA_ROOT_ELEMENT_NAME),
-                },
-                items: HashMap::new(),
-            },
-            properties: HashMap::new(),
-            methods: HashMap::new(),
+            name:  String::from(WOOPSA_ROOT_ELEMENT_NAME),
+            item_list: HashMap::new(),
+            property_list: HashMap::new(),
+            method_list: HashMap::new(),
             is_root_object: true,
         }
     }
@@ -56,59 +56,66 @@ impl WoopsaObject {
         !self.is_root_object
     }
 
-    pub fn name(&self) -> String {
-        return self.container.element.name.clone();
+    pub fn get_name(&self) -> String {
+        return self.name;
     }
 
     pub fn set_name(&mut self, name: String) {
-        self.container.element.name = name;
-    }
-
-    pub fn register_container(&mut self, container: WoopsaContainer) {
-        self.container = container;
+        self.name = name;
     }
 
     pub fn insert_item(&mut self, item: WoopsaObject) {
-        self.container.insert_item(item);
+        self.item_list.insert(item.name(), item);
     }
 
     pub fn remove_item(&mut self, item: WoopsaObject) {
-        self.container.remove_item(item);
+        self.item_list.remove(&(item.name()));
+    }
+
+    pub fn get_items(&self) -> HashMap<String, WoopsaObject> {
+        return self.item_list;
     }
 
     pub fn add_property(&mut self, property: WoopsaProperty) {
-        self.properties
-            .insert(property.element.name.clone(), property);
+        self.property_list.insert(property.name(), property);
     }
 
     pub fn remove_property(&mut self, property: WoopsaProperty) {
-        self.properties.remove(&(property.element.name));
+        self.property_list.remove(&(property.name()));
+    }
+
+    pub fn get_properties(&self) -> HashMap<String, WoopsaProperty> {
+        return self.property_list;
     }
 
     pub fn add_method(&mut self, method: WoopsaMethod) {
-        self.methods.insert(method.element.name.clone(), method);
+        self.method_list.insert(method.name(), method);
     }
 
     pub fn remove_method(&mut self, method: WoopsaMethod) {
-        self.methods.remove(&(method.element.name));
+        self.method_list.remove(&(method.name()));
+    }
+
+    pub fn get_methods(&self) -> HashMap<String, WoopsaMethod> {
+        return self.method_list;
     }
 
     pub fn find_item_by_name(&self, name: String) -> &WoopsaObject {
-        return self.container.items.get(&name).unwrap();
+        return self.item_list.get(&name).unwrap();
     }
 
     pub fn find_property_by_name(&self, name: String) -> &WoopsaProperty {
-        return self.properties.get(&name).unwrap();
+        return self.property_list.get(&name).unwrap();
     }
 
     pub fn find_method_by_name(&self, name: String) -> &WoopsaMethod {
-        return self.methods.get(&name).unwrap();
+        return self.method_list.get(&name).unwrap();
     }
 
     pub fn clear(&mut self) {
-        self.container.clear();
-        self.properties.clear();
-        self.methods.clear();
+        self.item_list.clear();
+        self.property_list.clear();
+        self.method_list.clear();
     }
 
     pub fn get_path(&self) -> String {
@@ -172,9 +179,25 @@ impl WoopsaObject {
     }
 }
 
+impl Element for WoopsaObject {
+    fn name(&self) -> String {
+        return self.get_name()
+    }
+}
+
+impl Container for WoopsaObject {
+    fn items(&self) -> HashMap<String, WoopsaObject> {
+        return self.get_items()
+    }
+}
+
 impl Object for WoopsaObject {
-    fn type_of(&self) -> &'static str {
-        "WoopsaObject"
+    fn properties(&self) -> HashMap<String, WoopsaProperty> {
+        return self.get_properties()
+    }
+
+    fn methods(&self) -> HashMap<String, WoopsaMethod> {
+        return self.get_methods()
     }
 }
 
@@ -184,9 +207,9 @@ impl fmt::Display for WoopsaObject {
             f,
             "(object named {} with items count {}, properties count {}, and methods count {})",
             self.name(),
-            self.container.items.len(),
-            self.properties.len(),
-            self.methods.len()
+            self.items().len(),
+            self.properties().len(),
+            self.methods().len()
         )
     }
 }

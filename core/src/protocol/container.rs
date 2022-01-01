@@ -1,34 +1,41 @@
 use serde::{Deserialize, Serialize};
 
-use crate::protocol::element::WoopsaElement;
+use crate::protocol::element::Element;
 use crate::protocol::object::WoopsaObject;
-use crate::protocol::constant::*;
+// use crate::protocol::constant::*;
 
 use std::collections::HashMap;
 use std::fmt;
 
-trait Container {
-    fn type_of(&self) -> &'static str;
-    fn clear(&mut self); 
+pub trait Container {
+    fn items(&self) -> HashMap<String, WoopsaObject>;
 }
 
-#[derive(Serialize, Deserialize)]
+#[derive(Serialize, Deserialize, Clone)]
 pub struct WoopsaContainer {
-    pub element: WoopsaElement,
+    pub name: String,
     pub items: HashMap<String, WoopsaObject>
 }
 
 impl WoopsaContainer {
-    pub fn name(&self) -> String {
-        return self.element.name.clone();
+    fn type_of(&self) -> &'static str {
+        "WoopsaContainer"
+    }
+
+    pub fn get_name(&self) -> String {
+        return self.name.clone();
     }
 
     pub fn insert_item(&mut self, item: WoopsaObject) {
-        self.items.insert(item.name().clone(), item);
+        self.items.insert(item.name(), item);
     }
 
     pub fn remove_item(&mut self, item: WoopsaObject) {
-        self.items.remove(&(item.container.element.name));
+        self.items.remove(&(item.name));
+    }
+
+    fn get_items(&mut self) -> HashMap<String, WoopsaObject> {
+        return self.items;
     }
 
     pub fn clear(&mut self) {
@@ -36,13 +43,13 @@ impl WoopsaContainer {
     }
 }
 
-impl Container for WoopsaContainer {
-    fn type_of(&self) -> &'static str {
-        "WoopsaContainer"
-    }
+impl Element for WoopsaContainer {
+    fn name(&self) -> String { self.get_name() }
+}
 
-    fn clear(&mut self) {
-        self.clear();
+impl Container for WoopsaContainer {
+    fn items(&self) -> HashMap<String, WoopsaObject> {
+        return self.get_items()
     }
 }
 
@@ -50,6 +57,6 @@ impl fmt::Display for WoopsaContainer {
     fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
         write!(f, "(container {} with items count {})", 
         self.name(),
-        self.items.len())
+        self.get_items().len())
     }
 }

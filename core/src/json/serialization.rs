@@ -3,6 +3,6 @@ trait WoopsaSerialization {
 
 }
 
-impl WoopsaSerialization {
+impl dyn WoopsaSerialization {
 
 }

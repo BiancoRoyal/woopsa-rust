@@ -1,5 +1,10 @@
-trait Link {}
+use serde::{Deserialize, Serialize};
 
+pub trait Link {
+    fn url(&self) -> String;
+}
+
+#[derive(Serialize, Deserialize, Clone)]
 pub struct WoopsaLink {
     pub server_url: String,
     pub resource_url: String,
@@ -8,6 +13,18 @@ pub struct WoopsaLink {
     pub relative_path: String
 }
 
-impl WoopsaLink {}
+impl WoopsaLink {
+    fn type_of(&self) -> &'static str {
+        "WoopsaLink"
+    }
 
-impl Link for WoopsaLink {}
+    fn get_server_url(&self) -> String {
+        return self.server_url.clone();
+    }
+}
+
+impl Link for WoopsaLink {
+    fn url(&self) -> String {
+        return self.get_server_url()
+    }
+}

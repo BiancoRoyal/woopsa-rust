@@ -6,7 +6,7 @@ use std::time::SystemTime;
 pub trait Value {
 }
 
-#[derive(Serialize, Deserialize)]
+#[derive(Serialize, Deserialize, Clone)]
 pub struct WoopsaValue {
     pub as_text: String,
     pub timestamp: SystemTime,
@@ -14,6 +14,10 @@ pub struct WoopsaValue {
 }
 
 impl WoopsaValue {
+    fn type_of(&self) -> &'static str {
+        "WoopsaValue"
+    }
+
     pub fn check_as_text_by_value_type(&self) {
         // todo: check if as_text and value_type are to be compatible
     }
