@@ -7,6 +7,8 @@ use crate::protocol::method_argument_info::WoopsaMethodArgumentInfo;
 use crate::protocol::value::WoopsaValue;
 use crate::protocol::value_type::WoopsaValueType;
 
+use crate::protocol::struct_type::WoopsaStructType;
+
 use std::time::SystemTime;
 
 pub trait Method {
@@ -25,7 +27,11 @@ pub struct WoopsaMethod {
 impl WoopsaMethod {
 
     pub fn type_of(&self) -> &'static str {
-        return "WoopsaMethod"
+        return "WoopsaMethod";
+    }
+
+    pub fn get_struct_type(&self) -> WoopsaStructType {
+        return WoopsaStructType::WoopsaMethod;
     }
 
     pub fn get_name(&self) -> String {

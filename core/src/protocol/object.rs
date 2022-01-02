@@ -11,6 +11,8 @@ use crate::protocol::container::WoopsaContainerService;
 use crate::protocol::method::WoopsaMethod;
 use crate::protocol::property::WoopsaProperty;
 
+use crate::protocol::struct_type::WoopsaStructType;
+
 use std::collections::HashMap;
 use std::fmt;
 
@@ -58,6 +60,10 @@ impl WoopsaObject {
 
     pub fn type_of(&self) -> &'static str {
         return "WoopsaObject"
+    }
+
+    pub fn get_struct_type(&self) -> WoopsaStructType {
+        return WoopsaStructType::WoopsaObject;
     }
 
     pub fn new(element_name: String) -> WoopsaObject {

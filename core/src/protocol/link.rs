@@ -1,10 +1,13 @@
 use serde::{Deserialize, Serialize};
 
+use crate::protocol::struct_type::WoopsaStructType;
+
 pub trait Link {
     fn url(&self) -> String;
 }
 
 #[derive(Serialize, Deserialize, Clone)]
+#[serde(rename_all = "camelCase")]
 pub struct WoopsaLink {
     pub server_url: String,
     pub resource_url: String,
@@ -14,11 +17,15 @@ pub struct WoopsaLink {
 }
 
 impl WoopsaLink {
-    fn type_of(&self) -> &'static str {
-        "WoopsaLink"
+    pub fn type_of(&self) -> &'static str {
+        return "WoopsaLink";
     }
 
-    fn get_server_url(&self) -> String {
+    pub fn get_struct_type(&self) -> WoopsaStructType {
+        return WoopsaStructType::WoopsaLink;
+    }
+
+    pub fn get_server_url(&self) -> String {
         return self.server_url.clone();
     }
 }

@@ -1,6 +1,9 @@
 use serde::{Deserialize, Serialize};
 
 use crate::protocol::value_type::WoopsaValueType;
+
+use crate::protocol::struct_type::WoopsaStructType;
+
 use std::time::SystemTime;
 
 pub trait Value {
@@ -19,7 +22,11 @@ pub struct WoopsaValue {
 impl WoopsaValue {
 
     pub fn type_of(&self) -> &'static str {
-        return "WoopsaValue"
+        return "WoopsaValue";
+    }
+
+    pub fn get_struct_type(&self) -> WoopsaStructType {
+        return WoopsaStructType::WoopsaValue;
     }
 
     pub fn new(as_text: String, value_type: WoopsaValueType) -> WoopsaValue {

@@ -1,5 +1,7 @@
 use serde::{Deserialize, Serialize};
 
+use crate::protocol::struct_type::WoopsaStructType;
+
 pub trait Element {
     fn name(&self) -> String;
 }
@@ -15,10 +17,14 @@ impl WoopsaElement {
         return "WoopsaElement";
     }
 
+    pub fn get_struct_type(&self) -> WoopsaStructType {
+        return WoopsaStructType::WoopsaElement;
+    }
+
     pub fn new(element_name: String) -> WoopsaElement {
-        WoopsaElement {
+        return WoopsaElement {
             element_name
-        }
+        };
     }
 
     pub fn get_name(&self) -> String {

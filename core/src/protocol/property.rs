@@ -6,6 +6,8 @@ use crate::protocol::element::WoopsaElement;
 use crate::protocol::value::WoopsaValue;
 use crate::protocol::value_type::WoopsaValueType;
 
+use crate::protocol::struct_type::WoopsaStructType;
+
 use std::fmt;
 use std::time::SystemTime;
 
@@ -27,6 +29,10 @@ impl WoopsaProperty {
 
     pub fn type_of(&self) -> &'static str {
         return "WoopsaProperty"
+    }
+
+    pub fn get_struct_type(&self) -> WoopsaStructType {
+        return WoopsaStructType::WoopsaProperty;
     }
 
     pub fn new_readonly(element_name: String, value: String, value_type: WoopsaValueType) -> WoopsaProperty {

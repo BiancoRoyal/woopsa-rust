@@ -7,6 +7,7 @@ pub mod method;
 pub mod method_argument_info;
 pub mod object;
 pub mod property;
+pub mod struct_type;
 pub mod url;
 pub mod value;
 pub mod value_type;

@@ -2,6 +2,8 @@ use serde::{Deserialize, Serialize};
 
 use crate::protocol::value_type::WoopsaValueType;
 
+use crate::protocol::struct_type::WoopsaStructType;
+
 pub trait MethodArgumentInfo {}
 
 #[derive(Serialize, Deserialize, Clone)]
@@ -12,7 +14,11 @@ pub struct WoopsaMethodArgumentInfo {
 
 impl WoopsaMethodArgumentInfo {
     fn type_of(&self) -> &'static str {
-        "WoopsaMethodArgumentInfo"
+        return "WoopsaMethodArgumentInfo";
+    }
+
+    pub fn get_struct_type(&self) -> WoopsaStructType {
+        WoopsaStructType::WoopsaMethod
     }
 }
 
