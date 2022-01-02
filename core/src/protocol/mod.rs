@@ -28,7 +28,7 @@ mod tests {
     fn it_build_simple_model() {
         let mut root = WoopsaObject::new(String::from("Root"));
         root.insert_item(WoopsaObject::new(String::from("Server")));
-        
+
         let mut objects = WoopsaObject::new(String::from("Objects"));
         objects.insert_item(WoopsaObject::new(String::from("Devices")));
         objects.insert_item(WoopsaObject::new(String::from("Models")));
@@ -52,7 +52,7 @@ mod tests {
     fn it_build_weatherstation_model() {
         let mut root = WoopsaObject::root();
         let mut objects = WoopsaObject::new(String::from("Objects"));
-        
+
         let mut weather_station = WoopsaObject::new(String::from("WeatherStation"));
         weather_station.add_property(WoopsaProperty::new(String::from("Temperature"), String::from("24.2"), WoopsaValueType::Real));
         weather_station.add_property(WoopsaProperty::new(String::from("IsRaining"), String::from("false"), WoopsaValueType::Logical));
@@ -63,7 +63,7 @@ mod tests {
 
         let mut thermostat = WoopsaObject::new(String::from("Thermostat"));
         thermostat.add_property(WoopsaProperty::new_readonly(String::from("SetPoint"), String::from("24.0"), WoopsaValueType::Real));
-        
+
         weather_station.insert_item(thermostat);
         objects.insert_item(weather_station);
         root.insert_item(objects);
@@ -93,3 +93,4 @@ mod tests {
         assert_eq!(objects.as_element().get_name(), String::from("Objects"));
     }
 }
+

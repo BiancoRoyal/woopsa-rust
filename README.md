@@ -19,9 +19,13 @@ The object-oriented part of the name means that data in Woopsa is hierarchical.
 
     cargo install woopsa
 
+## Test
+
+    cargo test -- --nocapture
+
 ## Contributing
 
-Let's work together - send us your pull request!
+Let's work together - send us your [GitHub][3] pull request!
 
 ### TODO
 
@@ -40,10 +44,12 @@ Let's work together - send us your pull request!
 [Klaus Landsdorf][1] from company [Bianco Royal Software Innovations][2]
 
 ## License
-The code is licenced under [MPL-2.0](https://opensource.org/licenses/MPL-2.0). Like all open source code, you use this code at your own risk.
+The code is licenced under [MPL-2.0](https://opensource.org/licenses/MPL-2.0).
+Like all open source code, you use this code at your own risk.
 
 [1]:https://github.com/biancode
 [2]:https://bianco-royal.cloud/
+[3]:https://github.com/BiancoRoyal/woopsa-rust
 
 
 
