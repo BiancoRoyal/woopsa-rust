@@ -6,8 +6,8 @@ pub trait MethodArgumentInfo {}
 
 #[derive(Serialize, Deserialize, Clone)]
 pub struct WoopsaMethodArgumentInfo {
-    pub name: String,
-    pub value_type: WoopsaValueType,
+    argument_name: String,
+    value_type: WoopsaValueType,
 }
 
 impl WoopsaMethodArgumentInfo {

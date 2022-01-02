@@ -4,18 +4,49 @@ use crate::protocol::value_type::WoopsaValueType;
 use std::time::SystemTime;
 
 pub trait Value {
+    fn as_text(&self) -> String;
+    fn time_stamp(&self) -> SystemTime;
+    fn value_type(&self) -> WoopsaValueType;
 }
 
 #[derive(Serialize, Deserialize, Clone)]
 pub struct WoopsaValue {
-    pub as_text: String,
-    pub timestamp: SystemTime,
-    pub value_type: WoopsaValueType,
+    as_text: String,
+    timestamp: SystemTime,
+    value_type: WoopsaValueType,
 }
 
 impl WoopsaValue {
-    fn type_of(&self) -> &'static str {
-        "WoopsaValue"
+
+    pub fn type_of(&self) -> &'static str {
+        return "WoopsaValue"
+    }
+
+    pub fn new(as_text: String, value_type: WoopsaValueType) -> WoopsaValue {
+       WoopsaValue {
+            as_text,
+            timestamp: SystemTime::now(),
+            value_type
+        }
+    }
+
+    pub fn new_with_timestamp(as_text: String, timestamp: SystemTime, value_type: WoopsaValueType) -> WoopsaValue {
+       WoopsaValue {
+            as_text,
+            timestamp,
+            value_type
+        }
+    }
+    pub fn as_text(&self) -> String {
+        return self.as_text.clone();
+    }
+
+    pub fn get_time_stamp(&self) -> SystemTime {
+        return self.timestamp.clone();
+    }
+
+    pub fn get_value_type(&self) -> WoopsaValueType {
+        return self.value_type.clone();
     }
 
     pub fn check_as_text_by_value_type(&self) {
@@ -30,4 +61,15 @@ impl WoopsaValue {
 }
 
 impl Value for WoopsaValue {
+    fn as_text(&self) -> String {
+        return self.as_text();
+    }
+
+    fn time_stamp(&self) -> SystemTime {
+        return self.get_time_stamp();
+    }
+
+    fn value_type(&self) -> WoopsaValueType {
+        return self.get_value_type();
+    }
 }

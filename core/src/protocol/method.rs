@@ -1,9 +1,12 @@
 use serde::{Deserialize, Serialize};
 
 use crate::protocol::element::Element;
+
+use crate::protocol::element::WoopsaElement;
 use crate::protocol::method_argument_info::WoopsaMethodArgumentInfo;
 use crate::protocol::value::WoopsaValue;
 use crate::protocol::value_type::WoopsaValueType;
+
 use std::time::SystemTime;
 
 pub trait Method {
@@ -14,25 +17,31 @@ pub trait Method {
 
 #[derive(Serialize, Deserialize, Clone)]
 pub struct WoopsaMethod {
-    pub name: String,
-    pub arguments: Vec<WoopsaMethodArgumentInfo>,
-    pub return_type: WoopsaValueType,
+    name: String,
+    arguments: Vec<WoopsaMethodArgumentInfo>,
+    return_type: WoopsaValueType,
 }
 
 impl WoopsaMethod {
-    fn type_of(&self) -> &'static str {
-        "WoopsaMethod"
+
+    pub fn type_of(&self) -> &'static str {
+        return "WoopsaMethod"
     }
 
-    fn get_name(&self) -> String {
+    pub fn get_name(&self) -> String {
         return self.name.clone();
     }
 
-    fn get_arguments(&self) ->  Vec<WoopsaMethodArgumentInfo> {
-        return self.arguments;
+    pub fn get_arguments(&self) ->  Vec<WoopsaMethodArgumentInfo> {
+        return self.arguments.clone();
     }
-    fn get_return_type(&self) ->  WoopsaValueType {
+
+    pub fn get_return_type(&self) ->  WoopsaValueType {
         return self.return_type.clone();
+    }
+
+    pub fn as_element(&self) -> WoopsaElement {
+        return WoopsaElement::new(self.get_name());
     }
 }
 
@@ -52,10 +61,6 @@ impl Method for WoopsaMethod {
     }
 
     fn invoke() -> WoopsaValue {
-        return WoopsaValue {
-            as_text: String::from("Null"),
-            timestamp: SystemTime::now(),
-            value_type: WoopsaValueType::Null,
-        };
+        return WoopsaValue::new(String::from("Null"), WoopsaValueType::Null);
     }
 }

@@ -33,16 +33,18 @@ mod tests {
         objects.insert_item(WoopsaObject::new(String::from("Models")));
 
         println!("/root/ is {}", &root);
-        for (key, value) in &(root.items) {
+        for (key, value) in root.get_items().iter() {
             println!("item of root -> {}: {}", key, value);
         }
 
         println!("/root/objects/ is {}", &objects);
-        for (key, value) in &(objects.items) {
+        for (key, value) in objects.get_items().iter() {
             println!("item of objects -> {}: {}", key, value);
         }
 
-        assert_eq!(objects.name(), String::from("Objects"));
+        assert_eq!(objects.get_name(), String::from("Objects"));
+        assert_eq!(objects.as_container().get_name(), String::from("Objects"));
+        assert_eq!(objects.as_element().get_name(), String::from("Objects"));
     }
 
     #[test]
@@ -66,25 +68,27 @@ mod tests {
         root.insert_item(objects);
 
         println!("/Root/ is {}", &root);
-        for (key, value) in &(root.items) {
+        for (key, value) in root.get_items().iter() {
             println!("item of root -> {}: {}", key, value);
         }
 
         let objects = root.find_item_by_name(String::from("Objects"));
         println!("/Root/Objects/ is {}", &objects);
-        for (key, value) in &(objects.items) {
+        for (key, value) in objects.get_items().iter() {
             println!("item of objects -> {}: {}", key, value);
         }
 
         let weather_station = objects.find_item_by_name(String::from("WeatherStation"));
         println!("/Root/Objects/WeatherStation/ is {}", &weather_station);
-        for (key, value) in &(weather_station.properties) {
+        for (key, value) in weather_station.get_properties().iter() {
             println!("property of weather_station -> {}: {}", key, value);
         }
-        for (key, value) in &(weather_station.items) {
+        for (key, value) in weather_station.get_items().iter() {
             println!("item of weather_station -> {}: {}", key, value);
         }
 
-        assert_eq!(objects.name(), String::from("Objects"));
+        assert_eq!(objects.get_name(), String::from("Objects"));
+        assert_eq!(objects.as_container().get_name(), String::from("Objects"));
+        assert_eq!(objects.as_element().get_name(), String::from("Objects"));
     }
 }

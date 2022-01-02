@@ -1,6 +1,8 @@
 use serde::{Deserialize, Serialize};
 
 use crate::protocol::element::Element;
+
+use crate::protocol::element::WoopsaElement;
 use crate::protocol::value::WoopsaValue;
 use crate::protocol::value_type::WoopsaValueType;
 
@@ -15,21 +17,22 @@ pub trait Property {
 
 #[derive(Serialize, Deserialize, Clone)]
 pub struct WoopsaProperty {
-    pub name: String,
-    pub value: WoopsaValue,
-    pub value_type: WoopsaValueType,
-    pub readonly: bool,
+    name: String,
+    value: WoopsaValue,
+    value_type: WoopsaValueType,
+    readonly: bool,
 }
 
 impl WoopsaProperty {
+
+    pub fn type_of(&self) -> &'static str {
+        return "WoopsaProperty"
+    }
+
     pub fn new_readonly(element_name: String, value: String, value_type: WoopsaValueType) -> WoopsaProperty {
         WoopsaProperty {
             name: element_name,
-            value: WoopsaValue {
-                as_text: value,
-                timestamp: SystemTime::now(),
-                value_type
-            },
+            value: WoopsaValue::new(value, value_type),
             value_type,
             readonly: true
         }
@@ -38,11 +41,7 @@ impl WoopsaProperty {
     pub fn new(element_name: String, value: String, value_type: WoopsaValueType) -> WoopsaProperty {
         WoopsaProperty {
             name: element_name,
-            value: WoopsaValue {
-                as_text: value,
-                timestamp: SystemTime::now(),
-                value_type
-            },
+            value: WoopsaValue::new(value, value_type),
             value_type,
             readonly: false
         }
@@ -53,13 +52,12 @@ impl WoopsaProperty {
     }
 
     pub fn set_value(&mut self, value: String, value_type: WoopsaValueType) {
-        self.value.value_type = value_type;
-        self.value.as_text = value;
-        self.value.timestamp = SystemTime::now();
+        self.set_value_type(value_type);
+        self.value = WoopsaValue::new(value, value_type);
     }
 
     pub fn get_value(&self) -> WoopsaValue {
-        return self.value
+        return self.value.clone()
     }
 
     pub fn set_value_type(&mut self, value_type: WoopsaValueType) {
@@ -67,7 +65,7 @@ impl WoopsaProperty {
     }
 
     pub fn get_value_type(&self) -> WoopsaValueType {
-        self.value_type
+        return self.value_type
     }
 
     pub fn set_readonly(&mut self) {
@@ -82,8 +80,8 @@ impl WoopsaProperty {
         self.readonly = false;
     }
 
-    fn type_of(&self) -> &'static str {
-        "WoopsaProperty"
+    pub fn as_element(&self) -> WoopsaElement {
+        return WoopsaElement::new(self.get_name());
     }
 }
 
@@ -110,7 +108,7 @@ impl Property for WoopsaProperty {
 impl fmt::Display for WoopsaProperty {
     fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
         write!(f, "({} with value {})", 
-        self.name,
-        self.value.as_text)
+        self.name(),
+        self.value().as_text())
     }
 }
