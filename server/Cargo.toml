@@ -1,12 +1,12 @@
 [package]
 name = "woopsa-server"
 version = "0.1.0"
-authors = ["Bianco Royal Developers <developers@bianco-royal.de>"]
+authors = ["P4NR Support <support@p4nr.com>"]
 repository = "https://github.com/BiancoRoyal/woopsa-rust.git"
 license = "MPL-2.0"
 description="A pure Rust library for Woopsa servers."
 keywords = ["woopsa", "fieldbus", "iiot", "opcua", "automation", "bacnet", "modbus"]
-homepage = "https://bianco-royal.cloud/"
+homepage = "https://p4nr.com/"
 readme = "README.md"
 edition = "2018"
 
