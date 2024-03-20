@@ -1,10 +1,9 @@
 [![Crates.io version](https://img.shields.io/crates/v/woopsa.svg)](https://crates.io/crates/woopsa)
 [![Docs](https://docs.rs/woopsa/badge.svg)](https://docs.rs/woopsa/)
-[![Coverage Status](https://coveralls.io/repos/github/BiancoRoyal/woopsa-rust/badge.svg?branch=master)](https://coveralls.io/github/BiancoRoyal/woopsa-rust?branch=master)
-[![CI](https://travis-ci.org/BiancoRoyal/woopsa-rust.svg?branch=master)](https://travis-ci.org/BiancoRoyal/woopsa-rust/)
 
 
 # woopsa-rust
+
 A pure Rust library for [Woopsa](http://www.woopsa.org/).
 
 ## Features
@@ -25,11 +24,12 @@ The object-oriented part of the name means that data in Woopsa is hierarchical.
 
 ## Contributing
 
-Let's work together - send us your [GitHub][3] pull request!
+Let's work together - send us your [GitHub][2] pull request!
 
 ### TODO
 
 * tests (TDD)
+* compliance tests
 * protocol stack
 * server
 * client
@@ -38,18 +38,17 @@ Let's work together - send us your [GitHub][3] pull request!
 * examples
     * server
     * client
-* automated release process
+* automated release process CI/CD
 
 ## Authors
-[Klaus Landsdorf][1] from company [Bianco Royal Software Innovations][2]
+[Klaus Landsdorf][1]
 
 ## License
 The code is licenced under [MPL-2.0](https://opensource.org/licenses/MPL-2.0).
 Like all open source code, you use this code at your own risk.
 
 [1]:https://github.com/biancode
-[2]:https://bianco-royal.cloud/
-[3]:https://github.com/BiancoRoyal/woopsa-rust
+[2]:https://github.com/BiancoRoyal/woopsa-rust
 
 
 
